@@ -23,6 +23,8 @@ describe("context-tier costs", () => {
 
 describe("NEON_MODELS", () => {
 	it.each([
+		{ id: "gpt-6-1-terra", name: "GPT-6.1 Terra", contextWindow: 1_050_000, maxTokens: 128_000,
+			cost: { input: 1, output: 5, cacheRead: 0.05, cacheWrite: 1.25 } },
 		{ id: "claude-fable-5-2", name: "Claude Fable 5.2", contextWindow: 1_000_000, maxTokens: 128_000,
 			cost: { input: 8, output: 40, cacheRead: 0.2, cacheWrite: 10 } },
 		{ id: "gemini-4-carbon", name: "Gemini 4 Carbon", contextWindow: 1_048_576, maxTokens: 65_536,

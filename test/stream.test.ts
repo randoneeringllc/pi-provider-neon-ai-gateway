@@ -179,7 +179,7 @@ describe("transformNeonPayload", () => {
 	});
 
 	describe("tool effort none family", () => {
-		it("contains exactly the nine live-verified chat ids", () => {
+		it("contains exactly the live-verified chat ids", () => {
 			expect([...TOOL_EFFORT_NONE_MODELS].sort()).toEqual([
 				"gpt-5-4",
 				"gpt-5-4-mini",
@@ -188,6 +188,7 @@ describe("transformNeonPayload", () => {
 				"gpt-5-6-luna",
 				"gpt-5-6-sol",
 				"gpt-5-6-terra",
+				"gpt-6-1-terra",
 				"gpt-6-luna",
 				"gpt-6-sol",
 			].sort());

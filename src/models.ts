@@ -465,6 +465,15 @@ export const NEON_MODELS: Model<"openai-completions">[] = [
 		cost: { input: 2, output: 10, cacheRead: 0.1, cacheWrite: 2.5, tiers: [{ inputTokensAbove: 272000, input: 4, output: 15, cacheRead: 0.2, cacheWrite: 5 }] },
 	}),
 	m({
+		id: "gpt-6-1-terra",
+		name: "GPT-6.1 Terra",
+		reasoning: true,
+		input: ["text", "image"],
+		context: 1_050_000,
+		output: 128_000,
+		cost: { input: 1, output: 5, cacheRead: 0.05, cacheWrite: 1.25, tiers: [{ inputTokensAbove: 272000, input: 2, output: 7.5, cacheRead: 0.1, cacheWrite: 2.5 }] },
+	}),
+	m({
 		id: "gpt-6-astra",
 		name: "GPT-6 Astra",
 		reasoning: true,
@@ -647,6 +656,7 @@ export const MODEL_CAPABILITIES: Record<string, NeonModelCapabilities> = {
 	"gpt-5-mini": { temperature: false, toolCall: true },
 	"gpt-5-nano": { temperature: false, toolCall: true },
 	"gpt-6-1-sol": { temperature: false, toolCall: true },
+	"gpt-6-1-terra": { temperature: false, toolCall: true },
 	"gpt-6-astra": { temperature: false, toolCall: true },
 	"gpt-6-luna": { temperature: false, toolCall: true },
 	"gpt-6-sol": { temperature: false, toolCall: true },
