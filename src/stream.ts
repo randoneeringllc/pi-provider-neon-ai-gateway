@@ -86,7 +86,7 @@ function removeKeys(payload: Record<string, unknown>, keys: readonly string[]): 
  * reasoning_effort but accepts them with reasoning_effort "none" when tools
  * are present. Live-verified against the gateway for the whole set:
  * gpt-5-4, gpt-5-4-mini, gpt-5-4-nano, gpt-5-5, gpt-5-6-luna, gpt-5-6-sol,
- * gpt-5-6-terra, gpt-6-luna, and gpt-6-sol all fail tool requests unless the
+ * gpt-5-6-terra, gpt-6-1-terra, gpt-6-luna, and gpt-6-sol all fail tool requests unless the
  * effort is explicitly "none". Models outside the set (gpt-5, gpt-5-1,
  * gpt-5-2, gpt-5-mini, gpt-5-nano, gpt-oss, gpt-6-1-sol, gpt-6-astra) keep
  * their requested effort, and no-tool requests are never touched.
@@ -99,6 +99,7 @@ export const TOOL_EFFORT_NONE_MODELS: ReadonlySet<string> = new Set([
 	"gpt-5-6-luna",
 	"gpt-5-6-sol",
 	"gpt-5-6-terra",
+	"gpt-6-1-terra",
 	"gpt-6-luna",
 	"gpt-6-sol",
 ]);
