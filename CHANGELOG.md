@@ -41,6 +41,7 @@ All notable changes to `pi-provider-neon-ai-gateway` are documented here. Versio
 - `scripts/update-models.ts` owns the `ANTHROPIC_MODEL_IDS` set and emits the `ANTHROPIC_MODELS` array in the generated `src/models.ts`. The next regen no longer drops the anthropic catalog.
 
 ### Fixed
+- Chat catalog generation skips Gemini image generators without hiding image-input chat models.
 
 - Gemini 4 Carbon cost estimates now use the published rates of $4 input, $20 output, and $0.20 cached input per million tokens instead of zero.
 

@@ -184,6 +184,8 @@ The active org is marked with `*` in the list output. The first time you run one
 By default, each model appears once: `neon-responses` for supported OpenAI models, `neon-anthropic` for Claude, and `neon` for the remaining chat models.
 Run `pi --list-models` to see available selections and `/neon-models` for chat-catalog pricing.
 
+Gemini image generators that advertise image output and publish an image-output rate are excluded in both picker modes. Vision chat models that accept images and return text remain available.
+
 To show every endpoint, including duplicates, run `/neon-catalog all`, then `/reload`.
 Run `/neon-catalog preferred` and `/reload` to return to the default, or `/neon-catalog status` to see the saved and active modes.
 The preference persists in `neon-catalog.json` under pi's agent directory.

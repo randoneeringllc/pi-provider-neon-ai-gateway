@@ -21,6 +21,24 @@ describe("isChatModel", () => {
 		expect(isChatModel({ id: "future-chat-model", type: "chat" })).toBe(true);
 	});
 
+	it("filters Gemini image generators from generated chat entries and capabilities", () => {
+		const image: UpstreamModel = {
+			id: "future-generator", family: "gemini-flash",
+			modalities: { input: ["text", "image"], output: ["text", "image"] },
+			cost: { output_image: 0 },
+		};
+		const source = buildModelsSource([
+			image,
+			{ ...image, id: "paid-generator", cost: { output_image: 60 } },
+			{ ...image, id: "vision-chat", modalities: { input: ["text", "image"], output: ["text"] } },
+			{ ...image, id: "mixed-gpt", family: "gpt-terra", cost: {} },
+		]);
+		expect(source).not.toContain('"future-generator"');
+		expect(source).not.toContain('"paid-generator"');
+		expect(source).toContain('id: "vision-chat"');
+		expect(source).toContain('id: "mixed-gpt"');
+	});
+
 	it("excludes embedding families", () => {
 		expect(isChatModel({ id: "gte-large-en", family: "text-embedding" })).toBe(false);
 		expect(isChatModel({ id: "qwen3-embedding-0-6b", family: "text-embedding" })).toBe(false);
