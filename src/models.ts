@@ -309,7 +309,7 @@ export const NEON_MODELS: Model<"openai-completions">[] = [
 		input: ["text", "image"],
 		context: 1_048_576,
 		output: 65_536,
-		cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+		cost: { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 0 },
 	}),
 	m({
 		id: "gemma-3-12b",
