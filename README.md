@@ -304,7 +304,7 @@ Gemini 3 and 4 tool calls keep their opaque [thought signatures](https://ai.goog
 Normal text stops and truncation stay unchanged.
 Gemini 4 Argon and Carbon use their default thinking behavior: the chat gateway rejects `reasoning_effort`, so the extension omits it.
 Pi's thinking selection does not control Gemini 4 reasoning depth on this endpoint.
-Carbon keeps the zero prices published in Neon's catalog; these estimates do not establish that gateway usage is free.
+Carbon cost estimates use Neon's published rates per million tokens: $4 input, $20 output, and $0.20 cached input.
 
 Newer Claude models on `neon-anthropic` use these native thinking modes:
 

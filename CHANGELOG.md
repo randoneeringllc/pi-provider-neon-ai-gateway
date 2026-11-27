@@ -7,7 +7,7 @@ All notable changes to `pi-provider-neon-ai-gateway` are documented here. Versio
 ### Added
 
 - Claude Fable 5.2 (`claude-fable-5-2`) with published limits and pricing, plus live-tested native Messages streaming, tools, and adaptive thinking. Thinking off uses low adaptive effort because the gateway rejects disabled thinking; Neon's native endpoint docs do not yet list this model.
-- Gemini 4 Carbon (`gemini-4-carbon`) with published limits and zero catalog prices, Gemini 4 payload cleanup, and thought-signature replay. Published zeros do not establish free usage; chat keeps the model's default thinking.
+- Gemini 4 Carbon (`gemini-4-carbon`) with published limits, Gemini 4 payload cleanup, and thought-signature replay. Chat keeps the model's default thinking.
 - Kimi K3.1 Pro (`kimi-k3-1-pro`) with Neon's published token rates and catalog limits.
 
 - `/neon-catalog preferred|all|status` switches between a deduplicated model picker and all gateway endpoints after `/reload`.
@@ -39,6 +39,8 @@ All notable changes to `pi-provider-neon-ai-gateway` are documented here. Versio
 - `scripts/update-models.ts` owns the `ANTHROPIC_MODEL_IDS` set and emits the `ANTHROPIC_MODELS` array in the generated `src/models.ts`. The next regen no longer drops the anthropic catalog.
 
 ### Fixed
+
+- Gemini 4 Carbon cost estimates now use the published rates of $4 input, $20 output, and $0.20 cached input per million tokens instead of zero.
 
 - Cap blocking checks current prepaid credit below $2 separately from the cumulative local-spend cap, including when only one limit is available.
 - `/neon-balance` headroom reserves $2 without subtracting local spend from current credit again, handles negative balances, and labels delayed org-wide metering.

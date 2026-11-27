@@ -26,7 +26,7 @@ describe("NEON_MODELS", () => {
 		{ id: "claude-fable-5-2", name: "Claude Fable 5.2", contextWindow: 1_000_000, maxTokens: 128_000,
 			cost: { input: 8, output: 40, cacheRead: 0.2, cacheWrite: 10 } },
 		{ id: "gemini-4-carbon", name: "Gemini 4 Carbon", contextWindow: 1_048_576, maxTokens: 65_536,
-			cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 } },
+			cost: { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 0 } },
 	])("registers $id with published metadata and capabilities", (expected) => {
 		expect(NEON_MODELS.find((model) => model.id === expected.id)).toMatchObject({
 			...expected, reasoning: true, input: ["text", "image"],
@@ -49,6 +49,12 @@ describe("NEON_MODELS", () => {
 		const model = NEON_MODELS.find((entry) => entry.id === "kimi-k3-1-pro")!;
 		const usage: Usage = { input: 1_000_000, output: 1_000_000, cacheRead: 1_000_000, cacheWrite: 0, totalTokens: 3_000_000, cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 } };
 		expect(calculateCost(model, usage)).toEqual({ input: 2, output: 10, cacheRead: 0.2, cacheWrite: 0, total: 12.2 });
+	});
+
+	it("estimates Gemini 4 Carbon usage with published token rates", () => {
+		const model = NEON_MODELS.find((entry) => entry.id === "gemini-4-carbon")!;
+		const usage: Usage = { input: 1_000_000, output: 1_000_000, cacheRead: 1_000_000, cacheWrite: 0, totalTokens: 3_000_000, cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 } };
+		expect(calculateCost(model, usage)).toEqual({ input: 4, output: 20, cacheRead: 0.2, cacheWrite: 0, total: 24.2 });
 	});
 
 	it("registers Gemini 4 Argon with its published limits, prices, and sampling support", () => {
