@@ -39,6 +39,7 @@ All notable changes to `pi-provider-neon-ai-gateway` are documented here. Versio
 - `scripts/update-models.ts` owns the `ANTHROPIC_MODEL_IDS` set and emits the `ANTHROPIC_MODELS` array in the generated `src/models.ts`. The next regen no longer drops the anthropic catalog.
 
 ### Fixed
+- Chat catalog generation skips Gemini image generators without hiding image-input chat models.
 
 - Cap blocking checks current prepaid credit below $2 separately from the cumulative local-spend cap, including when only one limit is available.
 - `/neon-balance` headroom reserves $2 without subtracting local spend from current credit again, handles negative balances, and labels delayed org-wide metering.

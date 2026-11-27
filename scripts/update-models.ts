@@ -23,11 +23,12 @@ export interface UpstreamModel {
 	reasoning_options?: { type?: string; values?: string[] }[];
 	tool_call?: boolean;
 	temperature?: boolean;
-	modalities?: { input?: string[] };
+	modalities?: { input?: string[]; output?: string[] };
 	limit?: { context?: number; output?: number };
 	cost?: {
 		input?: number;
 		output?: number;
+		output_image?: number;
 		/** USD per million tokens for cached input reads; omitted when not published. */
 		cache_read?: number;
 		/** USD per million tokens for cache writes; omitted when not published. */
@@ -272,9 +273,12 @@ const ANTHROPIC_MODEL_IDS = new Set([
 	"claude-sonnet-5-5",
 ]);
 
-/** Models supported by this Chat Completions provider, excluding embeddings and Responses-only ids. */
+/** Models supported by this Chat Completions provider. */
 export function isChatModel(model: UpstreamModel): boolean {
-	return (model.type === undefined || model.type === "chat") &&
+	// GPT chat models also advertise image output. Gemini image generators publish a separate image rate.
+	const isGeminiImageGenerator = /^gemini(?:-|$)/.test(model.family ?? "") &&
+		model.modalities?.output?.includes("image") && typeof model.cost?.output_image === "number";
+	return !isGeminiImageGenerator && (model.type === undefined || model.type === "chat") &&
 		!/embedding/i.test(model.family ?? "") && !RESPONSES_ONLY_MODELS.has(model.id.toLowerCase());
 }
 
